@@ -2,12 +2,16 @@
 import React, { useState, ReactNode } from "react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
+import I18nProvider from '../../app/i18nProvider'; // Import I18nProvider
+import { useTranslation } from 'react-i18next'; // Import useTranslation
+
 
 export default function DefaultLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { t } = useTranslation('common'); // Use the translation hook for 'common' namespace
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <>
@@ -26,7 +30,8 @@ export default function DefaultLayout({
           {/* <!-- ===== Main Content Start ===== --> */}
           <main>
             <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
-              {children}
+              <h1>{t('title')}</h1>
+            <I18nProvider>{children}</I18nProvider>
             </div>
           </main>
           {/* <!-- ===== Main Content End ===== --> */}
